@@ -57,7 +57,7 @@ if (substr(dirname(__FILE__), -6) == DIRECTORY_SEPARATOR.'tests') {
  * @link      http://pear.php.net/package/Net_FTP
  * @since     Class available since Release 1.3.3
  */
-class Net_FTPTest extends PHPUnit_Framework_TestCase
+class Net_FTPTest extends \PHPUnit\Framework\TestCase
 {
     protected $ftp;
     protected $ftpdir;
@@ -71,10 +71,9 @@ class Net_FTPTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        include_once 'PHPUnit/TextUI/TestRunner.php';
-
-        $suite  = new PHPUnit_Framework_TestSuite('Net_FTPTest');
-        PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit\Framework\TestSuite('Net_FTPTest');
+        $runner = new \PHPUnit\TextUI\TestRunner();
+        $runner->run($suite);
     }
 
     /**
@@ -84,7 +83,7 @@ class Net_FTPTest extends PHPUnit_Framework_TestCase
      * @access protected
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!file_exists('config.php')) {
             $this->markTestSkipped('config.php does not exist in '.getcwd());
@@ -141,7 +140,7 @@ class Net_FTPTest extends PHPUnit_Framework_TestCase
      * @access protected
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if ($this->ftp != null) {
             $this->ftp->cd($this->ftpdir);
